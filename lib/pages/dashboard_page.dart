@@ -1,8 +1,14 @@
+
 import 'package:flutter/material.dart';
 import 'package:game_verse/pages/puzzle_game_page.dart';
 import 'package:game_verse/pages/snake_game_page.dart';
+import 'package:game_verse/pages/space_fighter_game_page.dart';
+import 'package:game_verse/pages/sudoku_game_page.dart';
+import 'package:game_verse/pages/tetris_game_page.dart';
 import 'package:game_verse/pages/tic_tac_toe_page.dart';
+import 'package:game_verse/pages/word_search_game_page.dart';
 
+import 'bird_fly_game_page.dart';
 import 'memory_game_page.dart';
 
 class DashboardPage extends StatelessWidget {
@@ -13,6 +19,8 @@ class DashboardPage extends StatelessWidget {
     GameInfo(title: 'Puzzle', icon: Icons.extension, color: Colors.orange),
     GameInfo(title: 'Tetris', icon: Icons.layers, color: Colors.purple),
     GameInfo(title: 'Sudoku', icon: Icons.grid_on, color: Colors.teal),
+    GameInfo(title: 'Word Search', icon: Icons.search, color: Colors.indigo),
+    GameInfo(title: 'Space Fighter', icon: Icons.rocket_launch, color: Colors.purple),
   ];
 
   @override
@@ -62,10 +70,7 @@ class DashboardPage extends StatelessWidget {
       ),
       itemCount: games.length,
       itemBuilder: (context, index) {
-        return GameCard(
-          gameInfo: games[index],
-          index: index,
-        );
+        return GameCard(gameInfo: games[index],index: index,);
       },
     );
   }
@@ -83,9 +88,7 @@ class GameCard extends StatelessWidget {
   final GameInfo gameInfo;
   final int index;
 
-  const GameCard(
-      {Key? key, required this.gameInfo, required, required this.index})
-      : super(key: key);
+  const GameCard({Key? key, required this.gameInfo,required this.index}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -108,8 +111,7 @@ class GameCard extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => MemoryGamePage()),
               );
               break;
-
-            case 2: // Assuming Snake is the third game in your list
+            case 2:
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => SnakeGamePage()),
@@ -121,8 +123,28 @@ class GameCard extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => PuzzleGamePage()),
               );
               break;
+            case 4:
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => TetrisGamePage()),
+              );
+              break;
+            case 5:
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SudokuGamePage()),
+              );
+              break;
+            case 6:
+              Navigator.push(context, MaterialPageRoute(builder: (context) => WordSearchGamePage()));
+              break;
+            case 7:
+              Navigator.push(context, MaterialPageRoute(builder: (context) => SpaceFighterGamePage()));
+              break;
+          // Add more cases for other games when implemented
+            default:
+              print('Tapped on ${gameInfo.title}');
           }
-          print('Tapped on ${gameInfo.title}');
         },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
